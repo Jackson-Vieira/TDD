@@ -41,6 +41,11 @@ class BankAccount(ABC):
         self._validate_amount(amount)
         self._increase_balance(amount)
 
+class BankTransferManager:
+    def transfer(self, sender: BankAccount, receive: BankAccount, amount: float):
+        sender._decrease_balance(amount)
+        receive._increase_balance(amount)
+
 class CheckingAccount(BankAccount):
     ...
 

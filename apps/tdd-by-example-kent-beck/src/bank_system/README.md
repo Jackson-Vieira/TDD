@@ -38,12 +38,12 @@ This is a simple banking system that allows users to create accounts, deposit an
      3. Write tests to verify that withdrawals are handled correctly, considering the balance constraints. [X]
 
 4. **Check Balance:**
-   - As an account holder, I want to be able to check my account balance.
+   - As an account holder, I want to be able to check my account balance. [X]
    - Acceptance Criteria:
-     - The system should display the current account balance.
+     - The system should display the current account balance. [X]
    - Tasks:
-     1. Add a `getBalance` method to the `BankAccount` class.
-     2. Test `getBalance`
+     1. Add a equivalent `getBalance` method to the `BankAccount` class. [X]
+     2. Test `getBalance` [X]
 
 5. **Transfer Money:**
    - As an account holder, I want to be able to transfer money between two accounts.

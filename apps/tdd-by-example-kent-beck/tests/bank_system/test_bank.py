@@ -1,6 +1,7 @@
 from unittest import TestCase
 from src.bank_system.models.bank import (
     BankAccount,
+    BankTransferManager,
     FactoryBankAccount,
     CheckingAccount,
     SavingsAccount,
@@ -53,17 +54,34 @@ class BankAccounTest(TestCase):
         with self.assertRaises(ValueError):
             self.bank.withdraw(-10)
 
-    def test_deposit_with_str_value(self):
+    def test_withdraw_with_str_value(self):
         with self.assertRaises(TypeError):
-            self.bank.deposit("10")
+            self.bank.withdraw("10")
 
-    def test_insufficient_funds(self):
+    def test_withdraw_with_insufficient_funds(self):
         """
         Test Withdrawal should not be allowed if the account balance is insufficient.
         """
         with self.assertRaises(Exception):
             self.bank.withdraw(20)
             self.assertEqual(self.bank.balance, 0)
+
+class BankAccountTransferOperationTest(TestCase):
+    def setUp(self) -> None:
+        ...
+
+    def test_transfer_succesfull(self):
+        transfer_manager = BankTransferManager()
+        account_sender = BankAccount()
+        account_receiver = BankAccount()
+        
+        account_sender.deposit(100)
+
+        transfer_manager.transfer(sender=account_sender, receive=account_receiver, amount=20)
+
+        self.assertEqual(account_sender.balance, 80)
+        self.assertEqual(account_receiver.balance, 20)
+
 
 class FactoryBankAccountTest(TestCase):
     def test_create_valid_bank_account(self):
