@@ -42,6 +42,28 @@ class BankAccounTest(TestCase):
         with self.assertRaises(TypeError):
             self.bank.deposit("10")
 
+    def test_withdraw_method(self):
+        self.bank.deposit(20)
+        self.bank.withdraw(10)
+        self.assertEqual(self.bank.balance, 10)
+        self.bank.withdraw(5)
+        self.assertEqual(self.bank.balance, 5)
+
+    def test_withdraw_with_negative_input(self):
+        with self.assertRaises(ValueError):
+            self.bank.withdraw(-10)
+
+    def test_deposit_with_str_value(self):
+        with self.assertRaises(TypeError):
+            self.bank.deposit("10")
+
+    def test_insufficient_funds(self):
+        """
+        Test Withdrawal should not be allowed if the account balance is insufficient.
+        """
+        with self.assertRaises(Exception):
+            self.bank.withdraw(20)
+            self.assertEqual(self.bank.balance, 0)
 
 class FactoryBankAccountTest(TestCase):
     def test_create_valid_bank_account(self):

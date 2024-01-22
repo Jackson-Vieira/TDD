@@ -24,18 +24,18 @@ This is a simple banking system that allows users to create accounts, deposit an
      - The system should update the account balance accordingly. [X]
    - Tasks:
      1. Add a `deposit` method to the `BankAccount` class. [X]
-     2. Implement the Observer design pattern to notify account holders of balance changes. 
+     2. Implement the Observer design pattern to notify account holders of balance changes.  TODO
      3. Write a test to ensure that the account balance is updated correctly after a deposit. [X]
 
 3. **Withdraw Money:**
-   - As an account holder, I want to be able to withdraw money from my account.
-   - Acceptance Criteria:
-     - The system should update the account balance accordingly.
-     - Withdrawal should not be allowed if the account balance is insufficient.
+   - As an account holder, I want to be able to withdraw money from my account. [X]
+   - Acceptance Criteria: 
+     - The system should update the account balance accordingly. [X]
+     - Withdrawal should not be allowed if the account balance is insufficient. [X]
    - Tasks:
-     1. Add a `withdraw` method to the `BankAccount` class.
-     2. Apply the Command design pattern to encapsulate withdrawal requests.
-     3. Write tests to verify that withdrawals are handled correctly, considering the balance constraints.
+     1. Add a `withdraw` method to the `BankAccount` class. [X]
+     2. Apply the Command design pattern to encapsulate withdrawal requests. TODO
+     3. Write tests to verify that withdrawals are handled correctly, considering the balance constraints. [X]
 
 4. **Check Balance:**
    - As an account holder, I want to be able to check my account balance.
@@ -43,8 +43,7 @@ This is a simple banking system that allows users to create accounts, deposit an
      - The system should display the current account balance.
    - Tasks:
      1. Add a `getBalance` method to the `BankAccount` class.
-     2. Implement a Decorator to add additional information (e.g., currency symbol) to the displayed balance.
-     3. Write a test to ensure that the balance is formatted correctly.
+     2. Test `getBalance`
 
 5. **Transfer Money:**
    - As an account holder, I want to be able to transfer money between two accounts.
