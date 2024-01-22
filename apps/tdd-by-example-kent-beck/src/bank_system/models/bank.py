@@ -7,6 +7,9 @@ class BankAccount(ABC):
         self._id = uuid.uuid4()
         self._balance = 0
 
+        # TODO: Refact
+        self.history = []
+
     @property
     def balance(self):
         return self._balance
@@ -36,12 +39,17 @@ class BankAccount(ABC):
             raise Exception("Invalid amount value, must be less than of total balance")
         
         self._decrease_balance(amount)
+        self.history.append({"type": "withdraw", "amount": amount})
 
     def deposit(self, amount: float):
         self._validate_amount(amount)
         self._increase_balance(amount)
+        self.history.append({"type": "deposit", "amount": amount})
 
 class BankTransferManager:
+    def __init__(self):
+        ...
+
     def transfer(self, sender: BankAccount, receive: BankAccount, amount: float):
         sender._decrease_balance(amount)
         receive._increase_balance(amount)
@@ -51,16 +59,3 @@ class CheckingAccount(BankAccount):
 
 class SavingsAccount(BankAccount):
     ...
-
-class AccountTypeDoesNotExist(Exception):
-    ...
-
-class FactoryBankAccount:
-    @staticmethod
-    def create_bank_account(account_type: str):
-        if account_type == "checking":
-            return CheckingAccount()
-        elif account_type == "savings":
-            return SavingsAccount()
-        else:
-            raise AccountTypeDoesNotExist()

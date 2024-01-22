@@ -45,6 +45,12 @@ This is a simple banking system that allows users to create accounts, deposit an
      1. Add a equivalent `getBalance` method to the `BankAccount` class. [X]
      2. Test `getBalance` [X]
 
+8. **Storage accounts**
+    - As bank manager, I want storage the accounts in a database for make security operations later.
+    - Tasks:
+        1. create a `BankAccountRepository` to storage the accounts saffely. [X]
+        2. save and retrieve a `BankAccount` [X]
+
 5. **Transfer Money:**
    - As an account holder, I want to be able to transfer money between two accounts.
    - Acceptance Criteria:
@@ -55,9 +61,10 @@ This is a simple banking system that allows users to create accounts, deposit an
      3. Write tests to verify that funds are transferred correctly between accounts.
 
 6. **Account History:**
-   - As an account holder, I want to view the history of transactions on my account.
+   - As an account holder, I want to view the history of transactions on my account. [X]
    - Acceptance Criteria:
-     - The system should maintain a log of deposits, withdrawals, and transfers.
+     - The system should maintain a log of deposits, withdrawals, and transfers. [X-Transfer]
+     - The log must be include "type", "amount", "created_at", "to" if is transfer type
    - Tasks:
      1. Implement a transaction history log in the `BankAccount` class.
      2. Use the Observer pattern to update the log on each transaction.
@@ -71,6 +78,10 @@ This is a simple banking system that allows users to create accounts, deposit an
      1. Enhance the `withdraw` method to check for overdraft conditions.
      2. Write tests to validate that overdraft protection is working as expected.
 
+9. **Bank account security code**
+    - As an account holder, I want set a code to allow operations in my account, and secure save this code.
+    - Tasks:
+        - Add a secutiry code in `BankAccount` passed by the user, and save this code encrypted in database.
 
 ## Future Features
 - The system should allow users to close their accounts.

@@ -2,11 +2,12 @@ from unittest import TestCase
 from src.bank_system.models.bank import (
     BankAccount,
     BankTransferManager,
-    FactoryBankAccount,
     CheckingAccount,
     SavingsAccount,
-    AccountTypeDoesNotExist,
 )
+
+from src.bank_system.repositories.bank_account import AccountBankRepository
+from src.bank_system.factories import FactoryBankAccount, AccountTypeDoesNotExist
 
 from uuid import UUID
 
@@ -82,6 +83,51 @@ class BankAccountTransferOperationTest(TestCase):
         self.assertEqual(account_sender.balance, 80)
         self.assertEqual(account_receiver.balance, 20)
 
+class AccountBankRepositoryTest(TestCase):
+    def test_repository_instance(self):
+        acc_bank_repository = AccountBankRepository()
+        self.assertEqual(acc_bank_repository.count, 0)
+
+    def test_insert_bank_account(self):
+        acc_bank_repository = AccountBankRepository()
+        bank_account = BankAccount()
+        acc_bank_repository.save(bank_account)
+        self.assertEqual(acc_bank_repository.count, 1) 
+    
+    def test_get_bank_account(self):
+        acc_bank_repository = AccountBankRepository()
+        bank_account = BankAccount()
+            
+        bank_account.deposit(100)
+
+        bank_key = acc_bank_repository.save(bank_account)
+        result = acc_bank_repository.get(key=bank_key)
+
+        self.assertIsInstance(result, BankAccount)
+        self.assertEqual(result, bank_account)
+
+class HistoryTransactionsAccountBankTest(TestCase):
+    def test_recent_history_list(self):
+        bank_account = BankAccount()
+    
+        bank_account.deposit(100)
+        bank_account.deposit(100)
+        bank_account.withdraw(20)
+
+        history = bank_account.history
+
+        self.assertEqual(len(history), 3)
+        self.assertEqual(history[0]["type"], "deposit")
+        self.assertEqual(history[0]["amount"], 100)
+    
+    def test_withdraw_transaction_log(self):
+        ...
+
+    def test_transfer_transaction_log(self):
+        ...
+
+    def test_correct_order_history_by_timestamp(self):
+        ...
 
 class FactoryBankAccountTest(TestCase):
     def test_create_valid_bank_account(self):
